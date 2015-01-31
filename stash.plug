@@ -1,0 +1,9 @@
+[Python]
+Version=2+
+
+[Core]
+Name = stash
+Module = stash
+
+[Documentation]
+Description = Plugin to receive webhooks from Stash and show on the MUC
