@@ -1,9 +1,12 @@
 from errbot import BotPlugin, botcmd, webhook
 import logging
 import json
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+
 ## Author: Charles Gomes (github.com/charlesrg)
 ## LICENSE: GPL
-# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+
 
 def logReturn(message):
     logging.warning(message)
@@ -19,6 +22,10 @@ class stash(BotPlugin):
     @botcmd
     def get_configuration_template(self):
         return DEFAULT_CONFIG
+
+    def check_configuration(self, configuration):
+        """Bypass config check as err will fail without it"""
+        pass
 
     def stash_help(self, *args):
         """Stash plugin Help."""
@@ -51,7 +58,9 @@ class stash(BotPlugin):
     def stash(self, post):
         if self.config is None:
             return logReturn('Pluging not configured, see stash help')
-        contacts = self.confg['contacts']
+        if not 'contacts' in self.config:
+            return logReturn('config does not have a contacts session')
+        contacts = self.config['contacts']
 
         if post is None:
             return logReturn('Blank')
