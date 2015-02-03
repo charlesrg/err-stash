@@ -75,7 +75,7 @@ class stash(BotPlugin):
         project=post['repository']['project']['name']
 
         if not project in contacts:
-            return logReturn('no room to notify about this commit')
+            return logReturn('no room to notify about this commit project:' + project)
 
         room=contacts[project]
         repo=post['repository']['name']
